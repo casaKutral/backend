@@ -6,7 +6,7 @@ const Users = mongoose.model('User', new Schema({
   name: String,
   email: String,
   phone: Number,
-  workshopsBooked_ids: String
+  workshopsBooked_ids: Array
 }))
 
 module.exports = Users

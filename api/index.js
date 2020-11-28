@@ -11,10 +11,10 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-//conectarse a la base de datos
+// //conectarse a la base de datos
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 
-
+//ROUTES
 app.use('/api/workshops', workshops)
 app.use('/api/users', users)
 app.use('/api/teachers', teachers)

@@ -8,9 +8,9 @@ const Workshops = mongoose.model('Workshop', new Schema({
   capacity: Number,
   reserved: Number,
   available: Number,
-  // date: Date,
-  // hours: Array,
-  // frecuency: Array,
+  date: Date,
+  hours: Array,
+  frecuency: Array,
   cost: Number,
   status: String,
   description: String
