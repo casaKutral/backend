@@ -7,7 +7,8 @@ const Teachers = mongoose.model('Teacher', new Schema({
   email: String,
   phone: Number,
   biography: String,
-  workshops_ids: Array
+  profile_picture: String,
+  workshops_ids: Array,
 }))
 
 module.exports = Teachers
