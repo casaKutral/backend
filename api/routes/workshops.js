@@ -5,7 +5,10 @@ const Workshops = require('../models/Workshops')
 router.get('/', (request, response) => {
   Workshops.find()
     .exec()
-    .then(item => response.status(200).send(item)  )
+    .then(item => {
+      console.log(item)
+      response.status(200).send(item)
+    })
   
 })
 
@@ -26,6 +29,12 @@ router.post('/', (request, response) => {
 })
 
 router.put('/:id', (request, response) => {
+  Workshops.findOneAndUpdate(request.params.id, request.body)
+  .then(() => response.sendStatus(204))
+  
+})
+
+router.patch('/:id', (request, response) => {
   Workshops.findOneAndUpdate(request.params.id, request.body)
   .then(() => response.sendStatus(204))
   
