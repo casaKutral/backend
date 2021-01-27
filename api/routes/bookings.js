@@ -7,14 +7,12 @@ router.get('/', (request, response) => {
   Bookings.find()
     .exec()
     .then(item => response.status(200).send(item)  )
-  response.send('get data Bookings')
 })
 
 router.get('/:id', (request, response) => {
   Bookings.findById(request.params.id)
     .exec()
     .then(item => response.status(200).send(item)  )
-  response.send('get data Bookings')
 })
 
 router.post('/', async (request, response) => {
@@ -65,13 +63,15 @@ router.post('/', async (request, response) => {
 router.put('/:id', (request, response) => {
   Bookings.findOneAndUpdate(request.params.id, request.body)
   .then(() => response.sendStatus(204))
-  response.send('update data Bookings')
+})
+router.patch('/:id', (request, response) => {
+  Bookings.findOneAndUpdate(request.params.id, request.body)
+  .then(() => response.sendStatus(204))
 })
 
 router.delete('/:id', (request, response) => {
   Bookings.findOneAndDelete(request.params.id, request.body)
   .then(() => response.sendStatus(204))
-  response.send('delete data Bookings')
 })
 
 module.exports = router

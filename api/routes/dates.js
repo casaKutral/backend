@@ -1,33 +1,39 @@
 const express = require('express')
 const router = express.Router()
-const Users = require('../models/Users')
+const Dates = require('../models/Dates')
 
 router.get('/', (request, response) => {
-  Users.find()
+  Dates.find()
     .exec()
     .then(item => response.status(200).send(item)  )
+  
 })
 
 router.get('/:id', (request, response) => {
-  Users.findById(request.params.id)
+  Dates.findById(request.params.id)
     .exec()
     .then(item => response.status(200).send(item)  )
+  
 })
 
 router.post('/', (request, response) => {
-  Users.create(request.body)
-  .then(item => response.status(201).send(item))
+  Dates.create(request.body)
+  .then(item => {
+    console.log(request.body)
+    response.status(201).send(item)
+  })
+  // response.send('post data Dates')
 })
 
 router.put('/:id', (request, response) => {
-  Users.findOneAndUpdate(request.params.id, request.body)
+  Dates.findOneAndUpdate(request.params.id, request.body)
   .then(() => response.sendStatus(204))
+  
 })
 router.patch('/:id', (request, response) => {
-  console.log(request.params.id, request.body)
-  Users.findByIdAndUpdate({ _id: request.params.id },
+  Dates.findByIdAndUpdate({ _id: request.params.id },
     {
-      bookings_ids: request.body.bookings_ids,
+      booked: request.body.booked,
     }, function (err, docs) {
       if (err) response.json(err);
       else {
@@ -36,14 +42,12 @@ router.patch('/:id', (request, response) => {
         });
       }
     });
-  // Users.findOneAndUpdate(request.params.id, request.body)
-  // // Users.findOneAndUpdate(request.params.id, request.body)
-  // .then(() => response.sendStatus(204))
 })
 
 router.delete('/:id', (request, response) => {
-  Users.findOneAndDelete(request.params.id, request.body)
+  Dates.findOneAndDelete(request.params.id, request.body)
   .then(() => response.sendStatus(204))
+  
 })
 
 module.exports = router

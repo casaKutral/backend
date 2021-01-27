@@ -7,6 +7,7 @@ const Teachers = mongoose.model('Teacher', new Schema({
   email: String,
   phone: Number,
   biography: String,
+  subtitle: String,
   profile_picture: String,
   workshops_ids: Array,
 }))
