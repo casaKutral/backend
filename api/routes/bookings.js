@@ -36,12 +36,12 @@ router.post('/', (request, response) => {
       }
     });
 
-    const mail = `<div id="primera" style="padding-left: 30%">
+    const mail = `<div id="primera" style="padding-left: 10%">
       <table style="width: 76px; height: 76px; left: 0px; top: 4px;">  
         <tr>
           <td>
             <a href="https://www.casakutral.cl/">
-              <img src="../images/logo.png">
+              <img src="https://backend.casakutral.vercel.app/images/mail/logo.png">
             </a>
           </td>
         </tr>
@@ -97,7 +97,7 @@ router.post('/', (request, response) => {
       <table> 
         <tr style="position: absolute; width: 60%; height: 133px; left: 10px; top: 404px;">
           <td>
-              <img src="">
+              <img src="https://backend.casakutral.vercel.app/images/mail/principal.png">
           </td>
         </tr> 
       </table> 
@@ -136,7 +136,7 @@ router.post('/', (request, response) => {
       <table style="width: 50%; ">
         <tr>
           <td>
-              <img src="">
+              <img src="https://backend.casakutral.vercel.app/images/mail/mapa.png">
           </td>
         </tr>
         <tr>
@@ -167,19 +167,19 @@ router.post('/', (request, response) => {
       <table style="width: 100%; ">
         <tr>
           <td >
-            <img src="">
+            <img src="https://backend.casakutral.vercel.app/images/mail/face.png">
           </td> 
           <td >
-            <img src="">
+            <img src="https://backend.casakutral.vercel.app/images/mail/insta.png">
           </td>
           <td >
-            <img src="">
+            <img src="https://backend.casakutral.vercel.app/images/mail/tripadvisor.png">
           </td>
           <td >
-            <img src="">
+            <img src="https://backend.casakutral.vercel.app/images/mail/happycown.png">
           </td>
           <td >
-            <img src="">
+            <img src="https://backend.casakutral.vercel.app/images/mail/whatsapp.png">
           </td>           
         </tr>
       </table>
