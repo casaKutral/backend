@@ -173,19 +173,29 @@ router.post('/',  (request, response) => {
       <table style="width: 100%; margin-top: 15px">
         <tr>
           <td >
-            <img src="https://backend.casakutral.vercel.app/images/mail/face.png">
+            <a href="https://www.facebook.com/KutralAlimentos">
+              <img src="https://backend.casakutral.vercel.app/images/mail/face.png">
+            </a>
           </td> 
           <td >
-            <img src="https://backend.casakutral.vercel.app/images/mail/insta.png">
+            <a href="https://www.instagram.com/casa_kutral/">
+              <img src="https://backend.casakutral.vercel.app/images/mail/insta.png">
+              </a>
           </td>
           <td >
-            <img src="https://backend.casakutral.vercel.app/images/mail/tripadvisor.png">
+            <a href="https://www.tripadvisor.cl/Restaurant_Review-g3923507-d19334134-Reviews-Kutral_Glutenfree_Bakery_Cafe-Puchuncavi_Valparaiso_Region.html">
+              <img src="https://backend.casakutral.vercel.app/images/mail/tripadvisor.png">
+            </a>
           </td>
           <td >
-            <img src="https://backend.casakutral.vercel.app/images/mail/happycown.png">
+            <a href="https://www.happycow.net/reviews/kutral-maitencillo-196919">
+              <img src="https://backend.casakutral.vercel.app/images/mail/happycown.png">
+            </a>
           </td>
           <td >
-            <img src="https://backend.casakutral.vercel.app/images/mail/whatsapp.png">
+            <a href="https://wa.me/+56949380469">
+              <img src="https://backend.casakutral.vercel.app/images/mail/whatsapp.png">
+            </a>
           </td>           
         </tr>
       </table>
@@ -193,7 +203,7 @@ router.post('/',  (request, response) => {
     
     const info = transporter.sendMail({
       from: "'Casa Kutral' <reservas@casakutral.cl>",
-      to: 'rodrigovilchessa@gmail.com',
+      to: 'andres.mardo@gmail.com',
       subject: 'formulario de cursos',
       html: mail
     }).then((mail) => {
