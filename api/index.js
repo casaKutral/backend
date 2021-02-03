@@ -12,6 +12,10 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
+//permitir ver img en el server
+app.use(express.static('public'));   
+app.use('/images', express.static('images'));
+
 // //conectarse a la base de datos
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 mongoose.set('useFindAndModify', false);
