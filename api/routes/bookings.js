@@ -36,7 +36,7 @@ router.post('/', (request, response) => {
       }
     });
 
-    const mail = `<div id="primera" style="padding-left: 10%">
+    const mail = `<div id="primera" style="padding-left: 5%">
       <table style="width: 76px; height: 76px; left: 0px; top: 4px;">  
         <tr>
           <td>

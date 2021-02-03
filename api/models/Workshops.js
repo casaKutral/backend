@@ -11,7 +11,9 @@ const Workshops = mongoose.model('Workshop', new Schema({
   cost: Number,
   status: String,
   description: String,
-  picture: String
+  pictureMobile: String,
+  pictureDesktop: String,
+  pictureBanner: String
 }))
 
 module.exports = Workshops
