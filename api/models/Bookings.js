@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const Bookings = mongoose.model('Booking', new Schema({
   id: {type: Schema.Types.ObjectId},
+  shortID : String,
   dates: Array,
   cost: Number,
   status: String,

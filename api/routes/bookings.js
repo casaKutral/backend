@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Bookings = require('../models/Bookings')
 const nodemailer = require('nodemailer')
+const fetch = require("node-fetch");
 
 router.get('/', (request, response) => {
   Bookings.find()
@@ -21,7 +22,7 @@ router.get('/:id', (request, response) => {
 router.post('/', (request, response) => {
   Bookings.create(request.body)
   .then(item => {
-    console.log(item)
+    // console.log(item)
     const { _id, dates, cost, workshop_name, teacher_name, user_email } = item;
     let transporter = nodemailer.createTransport({
       host: 'mail.casakutral.cl',
@@ -35,8 +36,12 @@ router.post('/', (request, response) => {
           rejectUnauthorized: false
       }
     });
-
-    const mail = `<div id="primera" style="padding-left: 5%">
+    var fechasMail = dates[0].date + " - " + dates[0].hour + "<br/>";
+    for (let i = 1; i < dates.length; i++) {
+      var fechasMail = fechasMail + dates[i].date + " - " + dates[i].hour + "<br/>";
+    }
+    const shortID = JSON.stringify(_id).substring(18, 25)
+    const mail = `<div id="primera" style="padding-left: 10%; width: 500px;">
       <table style="width: 76px; height: 76px; left: 0px; top: 4px;">  
         <tr>
           <td>
@@ -46,21 +51,21 @@ router.post('/', (request, response) => {
           </td>
         </tr>
       </table>
-      <table style="width: 50%; ">
+      <table style="width: 90%; ">
         <tr>
           <td style="color: #EC6B80; font-family: Helvetica; font-style: italic; font-weight: bold; font-size: 18px; line-height: 23px; text-align: center;">
           <b>¡Estamos felices de verte por acá!</b>
           </td>            
         </tr>
       </table>
-      <table style="width: 50%; ">
+      <table style="width: 90%; margin-top: 15px">
         <tr>
           <td style="color: #00256A; font-family: Helvetica; font-style: normal; font-weight: normal; font-size: 16px; line-height: 19px;">
             Hemos recibido la solicitud de tu reserva exitosamente.
           </td>            
         </tr>
       </table>
-      <table style="width: 315px;  ">
+      <table style="width: 315px; margin-top: 15px">
         <tr>
           <td style="color: #00256A; font-family: Helvetica; font-style: normal; font-weight: bold; font-size: 17px; line-height: 20px; align-items: flex-end;">
             Taller
@@ -82,7 +87,7 @@ router.post('/', (request, response) => {
             Fecha
           </td>
           <td style="color: #5177CA; font-family: Helvetica; font-style: normal; font-weight: normal; font-size: 16px; line-height: 19px; align-items: center;">
-            ${dates}
+            ${fechasMail}
           </td>
         </tr>
         <tr>
@@ -95,20 +100,20 @@ router.post('/', (request, response) => {
         </tr>
       </table>
       <table> 
-        <tr style="position: absolute; width: 60%; height: 133px; left: 10px; top: 404px;">
+        <tr style="width: 90%;">
           <td>
               <img src="https://backend.casakutral.vercel.app/images/mail/principal.png">
           </td>
         </tr> 
       </table> 
-      <table style="width: 60%; ">       
+      <table style="width: 90%;">       
         <tr>
           <td style="color: #00256A; font-family: Helvetica; font-style: normal; font-weight: normal; font-size: 16px; line-height: 19px;">
           Para que se gestione por completo la reserva debes realizar la transferencia del monto total a la siguiente cuenta y en el comentario de esta poner tu “código de reserva”.
           </td>
         </tr> 
       </table>
-      <table style="width: 50%;  ">
+      <table style="width: 90%;">
         <tr>
           <td style="color: #00256A; font-family: Helvetica; font-style: normal; font-weight: bold; font-size: 18px; line-height: 22px; ">
             <ul>
@@ -121,7 +126,7 @@ router.post('/', (request, response) => {
           </td>
         </tr>
       </table>
-      <table style="width: 50%; margin-top: 25px">
+      <table style="width: 90%; margin-top: 25px">
         <tr>
           <td style="color: #00256A; font-family: Helvetica; font-style: normal; font-weight: bold; font-size: 12px; line-height: 14px;">
             Código de reserva:
@@ -129,11 +134,11 @@ router.post('/', (request, response) => {
         </tr>
         <tr style="background: #EC6B80; width: 25%; height: 46px; left: 10px; top: 845px;">
           <td style="color: #FFFFFF; font-family: Helvetica; font-style: normal; font-weight: bold; font-size: 22px; line-height: 26px; align-items: center; text-align: center; letter-spacing: 0.11em;">
-            ${_id}
+            ${shortID}
           </td>
         </tr>
       </table>
-      <table style="width: 50%; ">
+      <table style="width: 90%; ">
         <tr>
           <td>
               <img src="https://backend.casakutral.vercel.app/images/mail/mapa.png">
@@ -150,21 +155,21 @@ router.post('/', (request, response) => {
           </td>
         </tr>
       </table>
-      <table style="width: 50%;  margin-top: 37px">
+      <table style="width: 90%;  margin-top: 37px">
         <tr>
           <td style="color: #EC6B80; font-family: Helvetica; font-style: italic; font-weight: bold; font-size: 19px; line-height: 23px; text-align: center;">
           <b>¡Te estaremos esperando con muchas ganas!</b>
           </td>            
         </tr>
       </table>
-      <table style="width: 50%;  margin-top: 60px">
+      <table style="width: 90%;  margin-top: 60px">
         <tr>
           <td style="color: #00256A; font-family: Helvetica; font-style: normal; font-weight: normal; font-size: 12px; line-height: 111.3%;">
             Cualquier consulta o comentario no dudes en contactarnos ya sea por mail a <b>reservas@casakutral.cl</b> o a nuestro whatsapp <b>+56 9 49380469</b>.
           </td>            
         </tr>
       </table>
-      <table style="width: 100%; ">
+      <table style="width: 100%; margin-top: 15px">
         <tr>
           <td >
             <img src="https://backend.casakutral.vercel.app/images/mail/face.png">
@@ -187,14 +192,27 @@ router.post('/', (request, response) => {
     
     const info = transporter.sendMail({
       from: "'Casa Kutral' <reservas@casakutral.cl>",
-      to: 'marielk.mya@gmail.com',
+      to: user_email,
       subject: 'formulario de cursos',
       html: mail
     }).then((mail) => {
       if(mail) {
-        console.log(mail)
-        console.log('bookings')     
-        response.status(201).send(item)
+        // console.log('bookings') https://backend.casakutral.vercel.app/api/bookings/
+        fetch(`http://localhost:3000/api/bookings/${_id}`, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'PATCH',                                                              
+          body: JSON.stringify({ shortID: shortID, action: 'addShortID' })                                     
+        }).then((resp) => {
+          if(resp.status === 200) {
+            // console.log(resp)
+            response.status(201).send(item)
+          }
+        }).catch((err) => {
+          console.error(err)
+        })     
       } 
     }).catch((err) => {
       console.error(err)
@@ -206,9 +224,34 @@ router.put('/:id', (request, response) => {
   Bookings.findOneAndUpdate(request.params.id, request.body)
   .then(() => response.sendStatus(204))
 })
+
 router.patch('/:id', (request, response) => {
-  Bookings.findOneAndUpdate(request.params.id, request.body)
-  .then(() => response.sendStatus(204))
+  if(request.body.action === 'updateStatus') {
+    Bookings.findByIdAndUpdate({ _id: request.params.id },
+      {
+        status: request.body.status,
+      }, function (err, docs) {
+        if (err) response.json(err);
+        else {
+          response.json({
+            "message": "booking status updated",
+          });
+        }
+      });
+    } else if (request.body.action === 'addShortID') {
+      Bookings.findByIdAndUpdate({ _id: request.params.id },
+        {
+          shortID: request.body.shortID,
+        }, function (err, docs) {
+          if (err) response.json(err);
+          else {
+            response.json({
+              "message": "booking shortID updated",
+            });
+          }
+        });
+
+  }
 })
 
 router.delete('/:id', (request, response) => {
